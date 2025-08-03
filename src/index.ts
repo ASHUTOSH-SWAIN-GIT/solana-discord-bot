@@ -10,7 +10,8 @@ const client = new Client({
 client.commands = new Collection();
 
 // Load commands dynamically
-const commandFiles = fs.readdirSync(path.join(__dirname, 'commands')).filter((file: string) => file.endsWith('.ts'));
+const commandFiles = fs.readdirSync(path.join(__dirname, 'commands'))
+  .filter((file: string) => file.endsWith('.ts') && !file.includes('registerCommands'));
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.data.name, command);
@@ -32,7 +33,7 @@ client.on('interactionCreate', async (interaction: import('discord.js').Interact
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({ content: '❌ Error executing command.', ephemeral: true });
+    await interaction.reply({ content: 'Error executing command.', ephemeral: true });
   }
 });
 

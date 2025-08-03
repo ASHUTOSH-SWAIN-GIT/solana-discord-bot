@@ -9,7 +9,8 @@ const client = new Client({
 });
 client.commands = new Collection();
 // Load commands dynamically
-const commandFiles = fs.readdirSync(path.join(__dirname, 'commands'));
+const commandFiles = fs.readdirSync(path.join(__dirname, 'commands'))
+    .filter((file) => file.endsWith('.ts') && !file.includes('registerCommands'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     client.commands.set(command.data.name, command);
@@ -30,7 +31,7 @@ client.on('interactionCreate', async (interaction) => {
     }
     catch (error) {
         console.error(error);
-        await interaction.reply({ content: '❌ Error executing command.', ephemeral: true });
+        await interaction.reply({ content: 'Error executing command.', ephemeral: true });
     }
 });
 client.login(process.env.DISCORD_TOKEN);
