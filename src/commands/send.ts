@@ -65,7 +65,7 @@ module.exports = {
                 programId: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")
             });
 
-            // Filter only SPL tokens with balance > 0
+            // Filter only SPL tokens with balance > 09
             const ownedTokens = tokenAccounts.value
                 .map((accountInfo: any) => {
                     const info = accountInfo.account.data.parsed.info;
