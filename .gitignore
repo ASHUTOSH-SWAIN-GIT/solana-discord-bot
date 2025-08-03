@@ -8,6 +8,17 @@ node_modules/
 .env.test.local
 .env.production.local
 
+# Build output and compiled files
+dist/
+build/
+*.js
+*.d.ts
+*.js.map
+*.d.ts.map
+
+# But keep the deploy script
+!src/deploy-commands.js
+
 # TypeScript compiled files
 *.js
 *.d.ts
